@@ -1,8 +1,11 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import useStore from "@/useStore";
+import { NavLinkEnum, ServiceLinkEnum } from "@/types/enum";
+import SimpleIcon from "@/components/ui/simpleicon";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -53,10 +56,13 @@ const Socials: React.FC = () => {
             name="github"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Github profile:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="github" size={16} />
+                  Github profile:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://github.com/"
+                    prefix={ServiceLinkEnum.github}
                     placeholder="yourname"
                     autoFocus
                     {...field}
@@ -71,10 +77,13 @@ const Socials: React.FC = () => {
             name="linkedin"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Linkedin profile:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="linkedin" size={16} />
+                  Linkedin profile:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://linkedin.com/in/"
+                    prefix={ServiceLinkEnum.linkedin}
                     placeholder="yourname"
                     {...field}
                   />
@@ -88,10 +97,13 @@ const Socials: React.FC = () => {
             name="twitter"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Twitter profile:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="twitter" size={16} />
+                  Twitter profile:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://twitter.com/"
+                    prefix={ServiceLinkEnum.twitter}
                     placeholder="yourname"
                     {...field}
                   />
@@ -105,10 +117,13 @@ const Socials: React.FC = () => {
             name="instagram"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Instagram profile:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="instagram" size={16} />
+                  Instagram profile:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://instagram.com/"
+                    prefix={ServiceLinkEnum.instagram}
                     placeholder="yourname"
                     {...field}
                   />
@@ -122,10 +137,13 @@ const Socials: React.FC = () => {
             name="facebook"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Facebook profile:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="facebook" size={16} />
+                  Facebook profile:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://facebook.com/"
+                    prefix={ServiceLinkEnum.facebook}
                     placeholder="yourname"
                     {...field}
                   />
@@ -139,10 +157,13 @@ const Socials: React.FC = () => {
             name="youtube"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Youtube channel:</FormLabel>
+                <FormLabel className="flex items-center gap-1">
+                  <SimpleIcon name="youtube" size={16} />
+                  Youtube channel:
+                </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://youtube.com/"
+                    prefix={ServiceLinkEnum.youtube}
                     placeholder="yourname"
                     {...field}
                   />
@@ -154,14 +175,14 @@ const Socials: React.FC = () => {
         </form>
       </Form>
       <div className="flex justify-between mt-8">
-        <Link to="/skills">
+        <Link to={NavLinkEnum.skills}>
           <Button type="button" variant="outline">
-            Previous section
+            <ChevronLeftIcon className="mr-2" /> Previous section
           </Button>
         </Link>
-        <Link to="/support">
+        <Link to={NavLinkEnum.support}>
           <Button type="button" variant="outline">
-            Next section
+            Next section <ChevronRightIcon className="ml-2" />
           </Button>
         </Link>
       </div>

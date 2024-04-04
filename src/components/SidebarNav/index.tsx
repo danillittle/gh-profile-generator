@@ -1,27 +1,35 @@
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { NavLinkEnum } from "@/types/enum";
 
-interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  items: {
-    title: string;
-    href: string;
-  }[];
-}
+type NavItemType = {
+  title: string;
+  href: NavLinkEnum;
+};
 
-const SidebarNav: React.FC<SidebarNavProps> = ({
-  className,
-  items,
-  ...props
-}) => {
+const sidebarNavItems: NavItemType[] = [
+  {
+    title: "Introduction",
+    href: NavLinkEnum.introduction,
+  },
+  {
+    title: "Skills",
+    href: NavLinkEnum.skills,
+  },
+  {
+    title: "Socials",
+    href: NavLinkEnum.socials,
+  },
+  {
+    title: "Support",
+    href: NavLinkEnum.support,
+  },
+];
+
+const SidebarNav: React.FC = () => {
   return (
-    <nav
-      className={cn(
-        "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
-        className,
-      )}
-      {...props}
-    >
-      {items.map((item) => (
+    <nav className="flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1">
+      {sidebarNavItems.map((item) => (
         <NavLink
           key={item.href}
           to={item.href}

@@ -7,8 +7,7 @@ import { SupportFormType } from "@/pages/Support";
 const initialState = {
   introduction: {
     name: "",
-    shortDescription: "",
-    longDescription: "",
+    description: "",
     location: "",
     portfolioTitle: "",
     portfolioLink: "",

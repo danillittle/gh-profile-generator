@@ -1,6 +1,8 @@
 import "./globals.css";
+import App from "@/App";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Introduction, Skills, Socials, Support } from "@/pages";
+import { NavLinkEnum } from "@/types/enum.ts";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -8,7 +10,6 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import App from "@/App";
 
 const routes = createBrowserRouter([
   {
@@ -17,22 +18,22 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/introduction" />,
+        element: <Navigate to={NavLinkEnum.introduction} />,
       },
       {
-        path: "/introduction",
+        path: NavLinkEnum.introduction,
         element: <Introduction />,
       },
       {
-        path: "/skills",
+        path: NavLinkEnum.skills,
         element: <Skills />,
       },
       {
-        path: "/socials",
+        path: NavLinkEnum.socials,
         element: <Socials />,
       },
       {
-        path: "/support",
+        path: NavLinkEnum.support,
         element: <Support />,
       },
     ],

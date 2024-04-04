@@ -1,8 +1,10 @@
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import useStore from "@/useStore";
+import { NavLinkEnum } from "@/types/enum";
 import {
   Form,
   FormControl,
@@ -18,8 +20,7 @@ import { Separator } from "@/components/ui/separator";
 
 const introductionSchema = z.object({
   name: z.string(),
-  shortDescription: z.string(),
-  longDescription: z.string(),
+  description: z.string(),
   location: z.string(),
   portfolioTitle: z.string(),
   portfolioLink: z.union([z.string().url(), z.literal("")]),
@@ -60,7 +61,7 @@ const Introduction: React.FC = () => {
             name="name"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Hi! My name is:</FormLabel>
+                <FormLabel>👋 Hi! My name is:</FormLabel>
                 <FormControl>
                   <Input placeholder="John Doe" autoFocus {...field} />
                 </FormControl>
@@ -70,23 +71,10 @@ const Introduction: React.FC = () => {
           />
           <FormField
             control={form.control}
-            name="shortDescription"
+            name="description"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Subtitle:</FormLabel>
-                <FormControl>
-                  <Input placeholder="Web Developer" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="longDescription"
-            render={({ field }) => (
-              <FormItem className="mb-4">
-                <FormLabel>Long description:</FormLabel>
+                <FormLabel>✏️ Description:</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="eg: I've been learning to code for 5 years, after switching careers. I started with HTML, but have really found a passion for backend development..."
@@ -102,7 +90,7 @@ const Introduction: React.FC = () => {
             name="location"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>I'm based in:</FormLabel>
+                <FormLabel>🌍 I'm based in:</FormLabel>
                 <FormControl>
                   <Input placeholder="Hanoi, Vietnam" {...field} />
                 </FormControl>
@@ -115,7 +103,7 @@ const Introduction: React.FC = () => {
             name="portfolioTitle"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>See my portfolio:</FormLabel>
+                <FormLabel>🖥️ See my portfolio:</FormLabel>
                 <FormControl>
                   <Input placeholder="my portfolio" {...field} />
                 </FormControl>
@@ -144,7 +132,7 @@ const Introduction: React.FC = () => {
             name="emailMe"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Contact me at:</FormLabel>
+                <FormLabel>📫 Contact me at:</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -161,7 +149,7 @@ const Introduction: React.FC = () => {
             name="workingOnTitle"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>I'm currently working on:</FormLabel>
+                <FormLabel>🧑‍💻 I'm currently working on:</FormLabel>
                 <FormControl>
                   <Input placeholder="Apple Inc." {...field} />
                 </FormControl>
@@ -190,7 +178,7 @@ const Introduction: React.FC = () => {
             name="learning"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>I'm currently learning:</FormLabel>
+                <FormLabel>🧠 I'm currently learning:</FormLabel>
                 <FormControl>
                   <Input placeholder="a new framework" {...field} />
                 </FormControl>
@@ -203,7 +191,7 @@ const Introduction: React.FC = () => {
             name="collaborateOn"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>I'm open to collaborating on:</FormLabel>
+                <FormLabel>🤝 I'm open to collaborating on:</FormLabel>
                 <FormControl>
                   <Input placeholder="interesting projects" {...field} />
                 </FormControl>
@@ -216,7 +204,7 @@ const Introduction: React.FC = () => {
             name="additionalInfo"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>Anything else:</FormLabel>
+                <FormLabel>⚡ Anything else:</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="I'm secretly Spiderman... but don't tell anyone"
@@ -230,9 +218,9 @@ const Introduction: React.FC = () => {
         </form>
       </Form>
       <div className="flex justify-end mt-8">
-        <Link to="/skills">
+        <Link to={NavLinkEnum.skills}>
           <Button type="button" variant="outline">
-            Next section
+            Next section <ChevronRightIcon className="ml-2" />
           </Button>
         </Link>
       </div>

@@ -1,5 +1,8 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
 import useStore from "@/useStore";
+import { SKILLS_ENTRIES } from "@/pages/Skills/data";
+import { NavLinkEnum } from "@/types/enum";
 import {
   Tooltip,
   TooltipContent,
@@ -10,121 +13,12 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import SimpleIcon from "@/components/ui/simpleicon";
 
-const SKILLS = {
-  core: {
-    title: "Core",
-    items: [
-      "c",
-      "c++",
-      "csharp",
-      "coffeescript",
-      "dart",
-      "elixir",
-      "elm",
-      "erlang",
-      "git",
-      "go",
-      "haskell",
-      "java",
-      "javascript",
-      "kotlin",
-      "lua",
-      "nim",
-      "ocaml",
-      "php",
-      "python",
-      "r",
-      "ruby",
-      "rust",
-      "scala",
-      "swift",
-      "typescript",
-      "zig",
-    ],
-  },
-  frontend: {
-    title: "Frontend",
-    items: [
-      "html5",
-      "css3",
-      "sass",
-      "tailwindcss",
-      "bootstrap",
-      "mui",
-      "angular",
-      "react",
-      "redux",
-      "next.js",
-      "svelte",
-      "vue.js",
-      "nuxt.js",
-      "vite",
-      "webpack",
-      "babel",
-    ],
-  },
-  backend: {
-    title: "Backend",
-    items: [
-      "bun",
-      "node.js",
-      "express",
-      "nestjs",
-      "laravel",
-      "django",
-      "flask",
-      ".net",
-      "swagger",
-      "graphql",
-    ],
-  },
-  database: {
-    title: "Database",
-    items: ["mongodb", "postgresql", "mysql", "sqlite", "redis", "oracle"],
-  },
-  cloud: {
-    title: "Cloud",
-    items: [
-      "amazonaws",
-      "azuredevops",
-      "googlecloud",
-      "digitalocean",
-      "heroku",
-      "vercel",
-    ],
-  },
-  devops: {
-    title: "DevOps",
-    items: [
-      "docker",
-      "kubernetes",
-      "ansible",
-      "terraform",
-      "jenkins",
-      "teamcity",
-    ],
-  },
-  misc: {
-    title: "Misc",
-    items: ["linux", "windows", "macos", "gitlab", "github", "bitbucket"],
-  },
-  tools: {
-    title: "Tools",
-    items: [
-      "visualstudiocode",
-      "visualstudio",
-      "intellijidea",
-      "postman",
-      "figma",
-      "notion",
-      "slack",
-      "discord",
-    ],
-  },
-};
-
 const Skills: React.FC = () => {
   const { skills, setSkills } = useStore();
+
+  const onSetSkill = (skill: string) => () => {
+    setSkills(skill);
+  };
 
   return (
     <>
@@ -135,10 +29,10 @@ const Skills: React.FC = () => {
         </p>
       </div>
       <Separator className="my-6" />
-      {Object.entries(SKILLS).map(([key, { title, items }]) => (
+      {SKILLS_ENTRIES.map(([key, { title, items }]) => (
         <Card key={key} className="mb-4">
           <CardHeader>
-            <CardTitle>{title}</CardTitle>
+            <CardTitle>🧰 {title}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {items.map((icon) => (
@@ -147,7 +41,7 @@ const Skills: React.FC = () => {
                   <Button
                     key={icon}
                     type="button"
-                    onClick={() => setSkills(icon)}
+                    onClick={onSetSkill(icon)}
                     variant={skills.includes(icon) ? "default" : "ghost"}
                     className="h-auto p-2"
                   >
@@ -165,14 +59,14 @@ const Skills: React.FC = () => {
         </Card>
       ))}
       <div className="flex justify-between mt-8">
-        <Link to="/introduction">
+        <Link to={NavLinkEnum.introduction}>
           <Button type="button" variant="outline">
-            Previous section
+            <ChevronLeftIcon className="mr-2" /> Previous section
           </Button>
         </Link>
-        <Link to="/socials">
+        <Link to={NavLinkEnum.socials}>
           <Button type="button" variant="outline">
-            Next section
+            Next section <ChevronRightIcon className="ml-2" />
           </Button>
         </Link>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useStore from "@/useStore";
-import { getLink } from "@/lib/utils";
+import { getServiceLink } from "@/lib/utils";
 import { MdLink, MdText, MdTitle } from "@/components/md";
 import { Button } from "@/components/ui/button";
 import SimpleIcon from "@/components/ui/simpleicon";
@@ -8,7 +8,7 @@ import SimpleIcon from "@/components/ui/simpleicon";
 const Preview: React.FC = () => {
   const codeRef = useRef<HTMLDivElement>(null);
   const { introduction, skills, socials, support } = useStore();
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState<string>();
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -29,10 +29,9 @@ const Preview: React.FC = () => {
         <MdTitle condition={!!introduction.name}>
           Hi 👋 My name is {introduction.name}
         </MdTitle>
-        {`\n`}
-        <MdText>{introduction.shortDescription}</MdText>
-        {`\n`}
-        <MdText>{introduction.longDescription}</MdText>
+        <MdText condition={!!introduction.description}>
+          {introduction.description}
+        </MdText>
         <MdText condition={!!introduction.location}>
           * 🌍 I'm based in **{introduction.location}**
         </MdText>
@@ -61,70 +60,69 @@ const Preview: React.FC = () => {
         <MdText condition={!!introduction.additionalInfo}>
           * ⚡ {introduction.additionalInfo}
         </MdText>
-        {`\n`}
-        <MdTitle level={3} condition={!!skills.length}>
-          My skills:
-        </MdTitle>
-        {skills.length ? (
-          <p align="left">
-            {skills.map((skill) => (
-              <span key={skill} title={skill}>
-                <SimpleIcon name={skill} size={32} />{" "}
-              </span>
-            ))}
-          </p>
-        ) : null}
-        {`\n`}
-        {`\n`}
-        <MdTitle
-          level={3}
-          condition={!!Object.values(socials).filter((i) => i.length).length}
-        >
-          Connect with me::
-        </MdTitle>
-        {Object.values(socials).filter((i) => i.length).length ? (
-          <p align="left">
-            {Object.entries(socials).map(([key, value]) =>
-              value.length ? (
-                <a
-                  key={key}
-                  href={getLink(key, value)}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={key}
-                >
-                  <SimpleIcon name={key} size={32} />{" "}
-                </a>
-              ) : null,
-            )}
-          </p>
-        ) : null}
-        {`\n`}
-        {`\n`}
-        <MdTitle
-          level={3}
-          condition={!!Object.values(support).filter((i) => i.length).length}
-        >
-          Support:
-        </MdTitle>
-        {Object.values(support).filter((i) => i.length).length ? (
-          <p align="left">
-            {Object.entries(support).map(([key, value]) =>
-              value.length ? (
-                <a
-                  key={key}
-                  href={getLink(key, value)}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={key}
-                >
-                  <SimpleIcon name={key} size={32} />{" "}
-                </a>
-              ) : null,
-            )}
-          </p>
-        ) : null}
+
+        {!!skills.length && (
+          <>
+            {`\n`}
+            <MdTitle level={3}>My skills:</MdTitle>
+            <p align="left">
+              {skills.map((skill) => (
+                <span key={skill} title={skill}>
+                  <SimpleIcon name={skill} size={32} />{" "}
+                </span>
+              ))}
+            </p>
+            {`\n`}
+          </>
+        )}
+
+        {!!Math.max(...Object.values(socials).map((i) => i.length)) && (
+          <>
+            {`\n`}
+            <MdTitle level={3}>Connect with me::</MdTitle>
+            <p align="left">
+              {Object.entries(socials).map(([key, value]) =>
+                value.length ? (
+                  <a
+                    key={key}
+                    href={getServiceLink(key, value)}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={key}
+                  >
+                    <SimpleIcon name={key} size={32} />{" "}
+                  </a>
+                ) : null,
+              )}
+            </p>
+            {`\n`}
+          </>
+        )}
+
+        {!!Math.max(...Object.values(support).map((i) => i.length)) && (
+          <>
+            {`\n`}
+            <MdTitle level={3}>Support:</MdTitle>
+            <p align="left">
+              {Object.entries(support).map(
+                ([key, value]) =>
+                  !!value.length && (
+                    <a
+                      key={key}
+                      href={getServiceLink(key, value)}
+                      target="_blank"
+                      rel="noreferrer"
+                      title={key}
+                    >
+                      <SimpleIcon name={key} size={32} />{" "}
+                    </a>
+                  ),
+              )}
+            </p>
+          </>
+        )}
       </div>
+
       <div className="relative">
         <div className="border border-muted-foreground rounded-md p-4 mt-4 relative">
           <div className="font-mono text-sm whitespace-pre-wrap">{code}</div>

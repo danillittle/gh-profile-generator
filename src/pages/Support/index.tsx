@@ -1,8 +1,10 @@
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import useStore from "@/useStore";
+import { NavLinkEnum, ServiceLinkEnum } from "@/types/enum";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -56,7 +58,7 @@ const Support: React.FC = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://www.buymeacoffee.com/"
+                    prefix={ServiceLinkEnum.buyMeACoffee}
                     placeholder="yourname"
                     autoFocus
                     {...field}
@@ -77,7 +79,7 @@ const Support: React.FC = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    prefix="https://www.ko-fi.com/"
+                    prefix={ServiceLinkEnum.kofi}
                     placeholder="yourname"
                     {...field}
                   />
@@ -89,9 +91,9 @@ const Support: React.FC = () => {
         </form>
       </Form>
       <div className="flex justify-between mt-8">
-        <Link to="/socials">
+        <Link to={NavLinkEnum.socials}>
           <Button type="button" variant="outline">
-            Previous section
+            <ChevronLeftIcon className="mr-2" /> Previous section
           </Button>
         </Link>
       </div>
