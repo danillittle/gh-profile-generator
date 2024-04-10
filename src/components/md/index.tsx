@@ -1,51 +1,51 @@
 import { PropsWithChildren } from "react";
 
 type MdTitleProps = {
-  level?: 1 | 2 | 3 | 4 | 5 | 6;
-  condition?: boolean;
+    level?: 1 | 2 | 3 | 4 | 5 | 6;
+    condition?: boolean;
 };
 
 export const MdTitle: React.FC<PropsWithChildren<MdTitleProps>> = ({
-  children,
-  level = 1,
-  condition = true,
+    children,
+    level = 1,
+    condition = true,
 }) => {
-  if (!condition || !children) return null;
+    if (!condition || !children) return null;
 
-  return (
-    <>
-      {`#`.repeat(level)} {children}
-      {`\n`}
-    </>
-  );
+    return (
+        <>
+            {`#`.repeat(level)} {children}
+            {`\n`}
+        </>
+    );
 };
 
 type MdTextProps = {
-  condition?: boolean;
-  align?: "left" | "center" | "right";
+    condition?: boolean;
+    align?: "left" | "center" | "right";
 };
 
 export const MdText: React.FC<PropsWithChildren<MdTextProps>> = ({
-  children,
-  condition = true,
+    children,
+    condition = true,
 }) => {
-  if (!condition || !children) return null;
+    if (!condition || !children) return null;
 
-  return (
-    <>
-      {children}
-      {`\n`}
-    </>
-  );
+    return (
+        <>
+            {children}
+            {`\n`}
+        </>
+    );
 };
 
 type MdLinkProps = {
-  href: string;
+    href: string;
 };
 
 export const MdLink: React.FC<PropsWithChildren<MdLinkProps>> = ({
-  children,
-  href = "#",
+    children,
+    href = "#",
 }) => {
-  return `[${children ?? href}](${href})`;
+    return `[${children ?? href}](${href})`;
 };
